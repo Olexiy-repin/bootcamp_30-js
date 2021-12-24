@@ -8,6 +8,7 @@
 
 class Human {
   #email;
+  static test = '5';
 
   constructor({ firstName = 'Bob', lastName, age, hairColor, eyesColor } = {}) {
     this.firstName = firstName;
@@ -61,3 +62,5 @@ console.log(person.userEmail);
 
 console.log(person);
 console.log(person2);
+
+console.dir(Human.test);

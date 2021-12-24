@@ -16,9 +16,6 @@ class User {
 }
 
 class Manager extends User {
-  static test = 'my test';
-  #email = 'test@gmail.com';
-
   constructor({ numberOfSales, ...otherProps } = {}) {
     super(otherProps);
     this.numberOfSales = numberOfSales;
@@ -40,18 +37,53 @@ class Developer extends User {
   }
 }
 
-const myra = new Manager({ firstName: 'Ernest', lastName: 'Fox', age: 20, numberOfSales: 5 });
-console.log(myra);
-console.log(myra.getFullName());
-myra.doManagerWork();
-
-const jesus = new Developer({
+const manager = new Manager({ firstName: 'Ernest', lastName: 'Fox', age: 20, numberOfSales: 5 });
+const developer = new Developer({
   firstName: 'Roy',
   lastName: 'Miller',
   age: 25,
   completedProjects: 10,
 });
 
-console.log(jesus);
-console.log(jesus.getFullName());
-jesus.doDeveloperWork();
+console.log(manager);
+console.log(developer);
+
+// class Manager extends User {
+//   #email = 'test@gmail.com';
+
+//   constructor({ numberOfSales, ...otherProps } = {}) {
+//     super(otherProps);
+//     this.numberOfSales = numberOfSales;
+//   }
+
+//   doManagerWork() {
+//     console.log('Я занимаюсь продажами');
+//   }
+// }
+
+// class Developer extends User {
+//   constructor({ completedProjects, ...otherProps } = {}) {
+//     super(otherProps);
+//     this.completedProjects = completedProjects;
+//   }
+
+//   doDeveloperWork() {
+//     console.log('Я пишу код');
+//   }
+// }
+
+// const myra = new Manager({ firstName: 'Ernest', lastName: 'Fox', age: 20, numberOfSales: 5 });
+// console.log(myra);
+// console.log(myra.getFullName());
+// myra.doManagerWork();
+
+// const jesus = new Developer({
+//   firstName: 'Roy',
+//   lastName: 'Miller',
+//   age: 25,
+//   completedProjects: 10,
+// });
+
+// console.log(jesus);
+// console.log(jesus.getFullName());
+// jesus.doDeveloperWork();

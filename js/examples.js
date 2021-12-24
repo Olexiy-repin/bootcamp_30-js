@@ -95,6 +95,32 @@
 ? Объяви приватные свойства #login и #email, доступ к которым сделай через геттер и сеттер login и email.
 */
 
+// class User {
+//   #userLogin;
+//   #userEmail;
+
+//   constructor({ login, email } = {}) {
+//     this.#userLogin = login;
+//     this.#userEmail = email;
+//   }
+
+//   get login() {
+//     return this.#userLogin;
+//   }
+
+//   set login(newLogin) {
+//     this.#userLogin = newLogin;
+//   }
+
+//   get email() {
+//     return this.#userEmail;
+//   }
+
+//   set email(newEmail) {
+//     this.#userEmail = newEmail;
+//   }
+// }
+
 // const mango = new User({
 //   login: 'Mango',
 //   email: 'mango@dog.woof',
@@ -127,6 +153,43 @@
 ? Добавь методы addNote(note), removeNote(text) и updatePriority(text, newPriority).
 */
 
+// class Notes {
+//   static Priority = {
+//     LOW: 'low',
+//     NORMAL: 'normal',
+//     HIGH: 'high',
+//   };
+
+//   constructor(items = []) {
+//     this.items = items;
+//   }
+
+//   addNote(note) {
+//     if (!this.items.length) {
+//       this.items.push(note);
+//       return;
+//     }
+
+//     const condition = this.items.find(el => el.text === note.text);
+
+//     if (!condition) {
+//       this.items.push(note);
+//       return;
+//     }
+
+//     console.log('Такая заметка уже есть');
+//   }
+
+//   removeNote(note) {
+//     const idxOfNote = this.items.findIndex(el => el.text === note);
+//     this.items.splice(idxOfNote, 1);
+//   }
+
+//   updatePriority(text, newPriority) {
+//     this.items.find(el => el.text === text).priority = newPriority;
+//   }
+// }
+
 // const myNotes = new Notes([]);
 
 // myNotes.addNote({ text: 'Моя первая заметка', priority: Notes.Priority.LOW });
@@ -136,7 +199,13 @@
 //   text: 'Моя вторая заметка',
 //   priority: Notes.Priority.NORMAL,
 // });
+
 // console.log(myNotes.items);
+
+// myNotes.addNote({
+//   text: 'Моя вторая заметка',
+//   priority: Notes.Priority.NORMAL,
+// });
 
 // myNotes.removeNote('Моя первая заметка');
 // console.log(myNotes.items);
@@ -149,6 +218,16 @@
 ? и объявляет одно свойство on - состояние вкл/выкл (true/false).
 ? По умолчанию значение свойства on должно быть false.
 */
+
+// class Toggle {
+//   constructor({ isOpen = false } = {}) {
+//     this.on = isOpen;
+//   }
+
+//   toggle() {
+//     this.on = !this.on;
+//   }
+// }
 
 // const firstToggle = new Toggle({ isOpen: true });
 // console.group('firstToggle');
