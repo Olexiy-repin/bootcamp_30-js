@@ -1,0 +1,24 @@
+{
+  "name": "bootcamp_30",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olexiy-repin/bootcamp_30-js.git"
+  },
+  "author": "Oleksii Repin <lyoharepin@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Olexiy-repin/bootcamp_30-js/issues"
+  },
+  "homepage": "https://github.com/Olexiy-repin/bootcamp_30-js#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.2.0",
+    "parcel": "^2.2.0"
+  }
+}
