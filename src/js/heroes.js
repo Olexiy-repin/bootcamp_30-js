@@ -1,5 +1,6 @@
 'use strict';
 import heroesDb from './heroes.json';
+import createHeroeCards from '../templates/heroes.hbs';
 
 /*
 <li class="heroes__item">
@@ -13,3 +14,6 @@ import heroesDb from './heroes.json';
     </div>
 </li>
 */
+
+const heroesListEl = document.querySelector('.js-heroes-list');
+heroesListEl.insertAdjacentHTML('afterbegin', createHeroeCards(heroesDb));

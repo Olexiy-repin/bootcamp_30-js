@@ -1,17 +1,17 @@
 {{#each this}}
 <li class="heroes__item">
-    <img src="{{images.lg}}" alt="{{name}}" class="heroes__picture">
+    <img src="{{this.images.lg}}" alt="{{this.name}}" class="heroes__picture">
     <div class="heroes__content">
-        <h2 class="heroes__name">{{name}}</h2>
+        <h2 class="heroes__name">{{this.name}}</h2>
         <ul class="heroes__biography list">
             <li class="heroes__biography-item">
-                <p class="heroes__gender"><strong>Gender: </strong> {{appearance.gender}}</p>
+                <p class="heroes__gender"><strong>Gender: </strong> {{this.appearance.gender}}</p>
             </li>
             <li class="heroes__biography-item">
-                {{#if biography.alterEgos}}
-                <p class="heroes__alter-egos"><strong>Alter Egos: </strong> {{biography.alterEgos}}</p>
+                {{#if this.biography.alterEgos}}
+                <p class="heroes__alter-egos"><strong>Alter Egos: </strong> - {{this.biography.alterEgos}}</p>
                 {{/if}}
-                {{#unless biography.alterEgos}}
+                {{#unless this.biography.alterEgos}}
                 <p class="heroes__alter-egos"><strong>Alter Egos: </strong> - </p>
                 {{/unless}}
             </li>
@@ -19,29 +19,3 @@
     </div>
 </li>
 {{/each}}
-
-
-
-{{!-- {{#each this}}
-<li class="heroes__item">
-    <img src="{{images.lg}}" alt="{{name}}" class="heroes__picture">
-    <div class="heroes__content">
-        <h2 class="heroes__name">{{name}}</h2>
-        <ul class="heroes__biography list">
-            <li class="heroes__biography-item">
-                <p class="heroes__gender"><strong>Gender: </strong>{{appearance.gender}}</p>
-            </li>
-            {{#if biography.alterEgos}}
-            <li class="heroes__biography-item">
-                <p class="heroes__alter-egos"><strong>Alter Egos: </strong>{{biography.alterEgos}}</p>
-            </li>
-            {{/if}}
-            {{#unless biography.alterEgos}}
-            <li class="heroes__biography-item">
-                <p class="heroes__alter-egos"><strong>Alter Egos: </strong>-</p>
-            </li>
-            {{/unless}}
-        </ul>
-    </div>
-</li>
-{{/each}} --}}
