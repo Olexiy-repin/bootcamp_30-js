@@ -18,10 +18,15 @@ searchFormEl.addEventListener('submit', event => {
   galleryEl.innerHTML = '';
 
   unsplashApi.fetchImages().then(data => {
-    console.log(data);
     if (data.results.length === 0) {
       galleryEl.innerHTML = '';
       loadMoreBtnEl.classList.add('is-hidden');
+      return;
+    }
+
+    if (data.results.length < 10) {
+      loadMoreBtnEl.classList.add('is-hidden');
+      galleryEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
       return;
     }
 
