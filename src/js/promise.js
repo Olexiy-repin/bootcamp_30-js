@@ -4,6 +4,43 @@
  * Промисы
  */
 
+// const response = {
+//   a: 1,
+// };
+
+// console.log('Start');
+
+// setTimeout(() => {
+//   console.log('Timeout');
+// }, 1000);
+
+// fetch('https://api.github.com/users/olexiy-repin')
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error('error');
+//     }
+
+//     return response.json();
+//   })
+//   .then(data => {
+//     console.log(data);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+// console.log('End');
+
+// const promise = new Promise((resolve, reject) => {
+//   console.log('Hello');
+
+//   resolve('Hi');
+// });
+
+// promise.then(result => {
+//   console.log(result);
+// });
+
 // const promise = new Promise((resolve, reject) => {
 //   const isDone = Math.random();
 
