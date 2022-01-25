@@ -1,19 +1,19 @@
 'use strict';
 
-export default class unsplashAPI {
+export class UnsplashAPI {
   #BASE_URL = 'https://api.unsplash.com';
   #API_KEY = 'LxvKVGJqiSe6NcEVZOaLXC-f2JIIWZaq_o0WrF8mwJc';
 
-  constructor({ query = '' } = {}) {
+  constructor(keyword = null) {
     this.page = 1;
-    this.query = query;
+    this.keyword = keyword;
   }
 
-  fetchImages() {
+  fetchPhotos() {
     return fetch(
-      `${this.#BASE_URL}/search/photos?client_id=${this.#API_KEY}&query=${this.query}&page=${
+      `${this.#BASE_URL}/search/photos?query=${this.keyword}&page=${
         this.page
-      }&per_page=10`,
+      }&per_page=12&client_id=${this.#API_KEY}`,
     ).then(response => {
       if (!response.ok) {
         throw new Error(response.status);
@@ -21,5 +21,17 @@ export default class unsplashAPI {
 
       return response.json();
     });
+  }
+
+  getRandomPhotos() {
+    return fetch(`${this.#BASE_URL}/photos/random?count=12&client_id=${this.#API_KEY}`).then(
+      response => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+
+        return response.json();
+      },
+    );
   }
 }

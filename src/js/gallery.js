@@ -1,48 +1,77 @@
 'use strict';
 // https://unsplash.com/
 
-import unsplashAPI from './unsplash-api';
+import { UnsplashAPI } from './unsplash-api';
 import galleryCardsTemplate from '../templates/gallery-card.hbs';
 
 const searchFormEl = document.querySelector('.js-search-form');
-const galleryEl = document.querySelector('.js-gallery');
+const galleryListEl = document.querySelector('.js-gallery');
 const loadMoreBtnEl = document.querySelector('.js-load-more');
 
-const unsplashApi = new unsplashAPI();
+const unsplashApi = new UnsplashAPI();
+
+unsplashApi.getRandomPhotos().then(data => {
+  console.log(data);
+  galleryListEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
+});
 
 searchFormEl.addEventListener('submit', event => {
   event.preventDefault();
 
-  unsplashApi.query = event.currentTarget.elements['user-search-query'].value;
+  const keyword = event.currentTarget.elements['user-search-query'].value;
+
+  if (keyword.trim() === '') {
+    return;
+  }
+
+  unsplashApi.keyword = keyword;
   unsplashApi.page = 1;
-  galleryEl.innerHTML = '';
 
-  unsplashApi.fetchImages().then(data => {
-    if (data.results.length === 0) {
-      galleryEl.innerHTML = '';
-      loadMoreBtnEl.classList.add('is-hidden');
-      return;
-    }
+  galleryListEl.innerHTML = '';
 
-    if (data.results.length < 10) {
-      loadMoreBtnEl.classList.add('is-hidden');
-      galleryEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
-      return;
-    }
+  unsplashApi
+    .fetchPhotos()
+    .then(data => {
+      if (data.results.length === 0) {
+        loadMoreBtnEl.classList.add('is-hidden');
+        return;
+      }
 
-    galleryEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
-    loadMoreBtnEl.classList.remove('is-hidden');
-  });
+      if (data.total_pages === 1) {
+        galleryListEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data.results));
+        loadMoreBtnEl.classList.add('is-hidden');
+        return;
+      }
+
+      galleryListEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data.results));
+      loadMoreBtnEl.classList.remove('is-hidden');
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
-loadMoreBtnEl.addEventListener('click', () => {
+loadMoreBtnEl.addEventListener('click', event => {
   unsplashApi.page += 1;
-  unsplashApi.fetchImages().then(data => {
-    galleryEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data));
 
-    if (unsplashApi.page === data.total_pages) {
-      loadMoreBtnEl.classList.add('is-hidden');
-      return;
-    }
-  });
+  unsplashApi
+    .fetchPhotos()
+    .then(data => {
+      if (data.results.length === 0) {
+        loadMoreBtnEl.classList.add('is-hidden');
+        return;
+      }
+
+      if (data.total_pages === unsplashApi.page) {
+        galleryListEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data.results));
+        loadMoreBtnEl.classList.add('is-hidden');
+        return;
+      }
+
+      galleryListEl.insertAdjacentHTML('beforeend', galleryCardsTemplate(data.results));
+      loadMoreBtnEl.classList.remove('is-hidden');
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });

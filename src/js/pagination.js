@@ -4,16 +4,11 @@
 import createPostsMarkup from '../templates/posts.hbs';
 
 const loadMoreEl = document.querySelector('.js-load-more');
+const postsListEl = document.querySelector('.js-posts');
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
-let page = 0;
-
-const appendPosts = data => {
-  document.querySelector('.js-posts').insertAdjacentHTML('beforeend', createPostsMarkup(data));
-};
+let page = 1;
 
 const fetchPosts = () => {
-  page += 1;
-
   return fetch(`${BASE_URL}/posts?_limit=10&_page=${page}`).then(response => {
     if (!response.ok) {
       throw new Error(response.status);
@@ -23,14 +18,22 @@ const fetchPosts = () => {
   });
 };
 
-fetchPosts().then(data => {
-  appendPosts(data);
-});
-
-const loadMorePosts = () => {
-  fetchPosts().then(data => {
-    appendPosts(data);
+fetchPosts()
+  .then(data => {
+    postsListEl.insertAdjacentHTML('beforeend', createPostsMarkup(data));
+  })
+  .catch(err => {
+    console.log(err);
   });
-};
 
-loadMoreEl.addEventListener('click', loadMorePosts);
+loadMoreEl.addEventListener('click', event => {
+  page += 1;
+
+  fetchPosts()
+    .then(data => {
+      postsListEl.insertAdjacentHTML('beforeend', createPostsMarkup(data));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
